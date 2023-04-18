@@ -21,16 +21,16 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cookieParser());
 
-// Public Routes
+// Giriş yapmadan erişilebilecek endpointler
 app.use("/register", require("./routes/register"));
 app.use("/auth", require("./routes/auth"));
 app.use("/logout", require("./routes/logout"));
 app.use("/refresh", require("./routes/refresh"));
 
-// Private routes
+// Buradan sonraki route'ler giriş yapmadan görüntülenemeyecek.
 app.use(verifyJwt);
 
-// Error Handler
+// Hata olduğunda karşılayacak kısım.
 app.use(errorHandler);
 
 app.listen(PORT, async () => {

@@ -4,16 +4,27 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Logout from "./pages/Logout";
+import Journeys from "./pages/Journeys";
+import PersistLogin from "./components/PersistLogin";
+import RequireAuthLayout from "./components/RequireAuthLayout";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
     children: [
-      { path: "", element: <Home /> },
-      { path: "/login", element: <Login /> },
-      { path: "/register", element: <Register /> },
-      { path: "/logout", element: <Logout /> },
+      { index: true, element: <Login /> },
+      { path: "register", element: <Register /> },
+      { path: "logout", element: <Logout /> },
+      {
+        element: <PersistLogin />,
+        children: [
+          {
+            element: <RequireAuthLayout />,
+            children: [{ path: "journeys", element: <Journeys /> }],
+          },
+        ],
+      },
     ],
   },
 ]);

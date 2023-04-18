@@ -12,7 +12,7 @@ const refreshController = async (req, res) => {
   connectToMongoDB().then(async ({ db, client }) => {
     const users = db.collection("users");
 
-    const foundUser = users.findOne({ refreshToken: refreshToken });
+    const foundUser = await users.findOne({ refreshToken: refreshToken });
 
     if (!foundUser) return res.sendStatus(403);
 
