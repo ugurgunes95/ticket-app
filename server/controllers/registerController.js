@@ -2,7 +2,7 @@ const connectToMongoDB = require("../helpers/mongo");
 const bcrypt = require("bcrypt");
 
 const registerController = async (req, res) => {
-  const { name, lastName, age, gender, mail, tel, pwd } = req.body;
+  const { name, lastName, age, gender, email, tel, pwd } = req.body.data;
   // Gerekli alanların kontrolü
 
   if (!name) return res.status(400).json({ message: "İsim alanı zorunludur." });
@@ -12,7 +12,7 @@ const registerController = async (req, res) => {
     return res.status(400).json({ message: "Soyad alanı zorunludur." });
   else if (!gender)
     return res.status(400).json({ message: "Cinsiyet alanı zorunludur." });
-  else if (!mail)
+  else if (!email)
     return res.status(400).json({ message: "Mail alanı zorunludur." });
   else if (!tel)
     return res.status(400).json({ message: "Telefon alanı zorunludur." });
@@ -23,7 +23,7 @@ const registerController = async (req, res) => {
     const users = db.collection("users");
 
     const isDuplicate = await users
-      .find({ mail: mail })
+      .find({ mail: email })
       .toArray(function (err, result) {
         if (err) console.log(err);
         client.close();
@@ -39,7 +39,7 @@ const registerController = async (req, res) => {
         lastName: lastName,
         age: age,
         gender: gender,
-        mail: mail,
+        mail: email,
         tel: tel,
         pwd: hashedPassword,
         refreshToken: "",
@@ -47,7 +47,7 @@ const registerController = async (req, res) => {
 
       return res
         .status(201)
-        .json({ message: `Yeni kullanıcı ${mail} oluşturuldu.` });
+        .json({ message: `Yeni kullanıcı ${email} oluşturuldu.` });
     } catch (err) {
       console.log(err);
       return res

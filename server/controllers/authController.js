@@ -57,6 +57,7 @@ const authController = async (req, res) => {
 
       res.json({
         accessToken,
+        user,
       });
     } else {
       return res.status(401).json({ message: "Parola yanlış" });

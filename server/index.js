@@ -24,6 +24,8 @@ app.use(cookieParser());
 // Public Routes
 app.use("/register", require("./routes/register"));
 app.use("/auth", require("./routes/auth"));
+app.use("/logout", require("./routes/logout"));
+app.use("/refresh", require("./routes/refresh"));
 
 // Private routes
 app.use(verifyJwt);
