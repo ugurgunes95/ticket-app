@@ -27,7 +27,7 @@ const Login = () => {
       setMsg(error.data.message);
     } else if (isSuccess) {
       setMsg("Giriş işlemi başarılı");
-      setTimeout(() => navigate("/", { replace: true }), 1250);
+      setTimeout(() => navigate("/journeys", { replace: true }), 1250);
     }
   }, [isError, isSuccess]);
 

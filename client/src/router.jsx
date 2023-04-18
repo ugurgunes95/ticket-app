@@ -7,15 +7,22 @@ import Logout from "./pages/Logout";
 import Journeys from "./pages/Journeys";
 import PersistLogin from "./components/PersistLogin";
 import RequireAuthLayout from "./components/RequireAuthLayout";
+import PublicLayout from "./components/PublicLayout";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
     children: [
-      { index: true, element: <Login /> },
-      { path: "register", element: <Register /> },
-      { path: "logout", element: <Logout /> },
+      {
+        element: <PublicLayout />,
+        children: [
+          { index: true, element: <Home /> },
+          { path: "login", element: <Login /> },
+          { path: "register", element: <Register /> },
+          { path: "logout", element: <Logout /> },
+        ],
+      },
       {
         element: <PersistLogin />,
         children: [
