@@ -12,8 +12,10 @@ const corsOptions = require("./config/corsOptions");
 const errorHandler = require("./middleware/errorHandler");
 const verifyJwt = require("./helpers/verifyJwt");
 const initialize = require("./helpers/initialize");
+const { logger } = require("./middleware/logEvents");
 
 // Middlewares
+app.use(logger);
 app.use(credentials);
 app.use(cors(corsOptions));
 
@@ -29,6 +31,9 @@ app.use("/refresh", require("./routes/refresh"));
 
 // Buradan sonraki route'ler giriş yapmadan görüntülenemeyecek.
 app.use(verifyJwt);
+
+app.use("/journeys", require("./routes/journeys"));
+app.use("/ticket", require("./routes/ticket"));
 
 // Hata olduğunda karşılayacak kısım.
 app.use(errorHandler);

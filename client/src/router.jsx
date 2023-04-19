@@ -8,6 +8,7 @@ import Journeys from "./pages/Journeys";
 import PersistLogin from "./components/PersistLogin";
 import RequireAuthLayout from "./components/RequireAuthLayout";
 import PublicLayout from "./components/PublicLayout";
+import MyTickets from "./pages/MyTickets";
 
 const router = createBrowserRouter([
   {
@@ -20,7 +21,6 @@ const router = createBrowserRouter([
           { index: true, element: <Home /> },
           { path: "login", element: <Login /> },
           { path: "register", element: <Register /> },
-          { path: "logout", element: <Logout /> },
         ],
       },
       {
@@ -28,7 +28,11 @@ const router = createBrowserRouter([
         children: [
           {
             element: <RequireAuthLayout />,
-            children: [{ path: "journeys", element: <Journeys /> }],
+            children: [
+              { path: "journeys", element: <Journeys /> },
+              { path: "mytickets", element: <MyTickets /> },
+              { path: "logout", element: <Logout /> },
+            ],
           },
         ],
       },
